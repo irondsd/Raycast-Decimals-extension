@@ -22,8 +22,13 @@ export default function Command() {
       const pow = new BN(String(Math.pow(10, decimals)))
 
       if (actionField === 'parse') {
-        const result = number.div(pow)
-        Clipboard.copy(result.toString())
+        try {
+          const result = parseInt(textField) / Math.pow(10, parseInt(decimalsField))
+          Clipboard.copy(String(parseFloat(result.toFixed(2))))
+        } catch (error) {
+          const result = number.div(pow)
+          Clipboard.copy(result.toString())
+        }
       } else {
         const result = number.mul(pow)
         Clipboard.copy(result.toString())
